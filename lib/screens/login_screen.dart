@@ -12,7 +12,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  
+
   bool isLoading = false;
   String errorText = '';
   String? validationError;
@@ -98,9 +98,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                
+
                 SizedBox(height: 54),
-                
+
                 Image.asset(
                   'assets/images/Main_image.png',
                   width: 296,
@@ -147,33 +147,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           onChanged: (value) => _clearErrors(),
                         ),
                       ),
-                      
+
                       SizedBox(height: 4),
-                      
+
                       if (validationError != null)
                         Container(
                           width: double.infinity,
                           padding: EdgeInsets.only(left: 8.0, top: 4.0),
                           child: Text(
                             validationError!,
-                            style: TextStyle(
-                              color: errorColor,
-                              fontSize: 12.0,
-                            ),
+                            style: TextStyle(color: errorColor, fontSize: 12.0),
                             textAlign: TextAlign.left,
                           ),
                         ),
-                      
+
                       if (errorText.isNotEmpty)
                         Container(
                           width: double.infinity,
                           padding: EdgeInsets.only(left: 8.0, top: 4.0),
                           child: Text(
                             errorText,
-                            style: TextStyle(
-                              color: errorColor,
-                              fontSize: 12.0,
-                            ),
+                            style: TextStyle(color: errorColor, fontSize: 12.0),
                             textAlign: TextAlign.left,
                           ),
                         ),
@@ -181,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 30),
-                
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.0),
                   child: ElevatedButton(

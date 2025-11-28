@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final jwt = await TokenStorage.getJwt();
       final email = await TokenStorage.getEmail();
-      
+
       if (jwt == null) {
         _goToLogin();
         return;
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
 
       final userId = await AuthService.getUserId(jwt);
-      
+
       if (userId == null) {
         final refreshed = await _refreshToken();
         if (!refreshed) {
@@ -65,12 +65,14 @@ class _HomeScreenState extends State<HomeScreen> {
       }
 
       final newTokens = await AuthService.refreshToken(refreshToken);
-      if (newTokens != null && newTokens['jwt'] != null && newTokens['refresh_token'] != null) {
+      if (newTokens != null &&
+          newTokens['jwt'] != null &&
+          newTokens['refresh_token'] != null) {
         await TokenStorage.saveTokens(
           newTokens['jwt'],
           newTokens['refresh_token'],
         );
-        
+
         final userId = await AuthService.getUserId(newTokens['jwt']);
         setState(() {
           _userId = userId;
@@ -104,18 +106,12 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(
           'Main',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Color(0xFFFF6B00),
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.exit_to_app,
-              color: Colors.white,
-            ),
+            icon: Icon(Icons.exit_to_app, color: Colors.white),
             onPressed: _logout,
           ),
         ],
@@ -136,13 +132,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.green,
                       ),
                     ),
-                    
+
                     SizedBox(height: 40),
-                    
+
                     _buildInfoCard(),
-                    
+
                     SizedBox(height: 20),
-                    
+
                     ElevatedButton(
                       onPressed: _loadUserData,
                       style: ElevatedButton.styleFrom(
@@ -161,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    
+
                     if (_errorText.isNotEmpty)
                       Padding(
                         padding: EdgeInsets.only(top: 20),
@@ -187,21 +183,15 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Text(
               'User Information:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            
+
             SizedBox(height: 16),
-            
+
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'User ID:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                Text('User ID:', style: TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(height: 4),
                 Container(
                   width: double.infinity,
@@ -212,22 +202,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: SelectableText(
                     _userId ?? 'Failed to upload',
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
+                    style: TextStyle(fontSize: 12),
                   ),
                 ),
               ],
             ),
-            
+
             SizedBox(height: 16),
-            
+
             Row(
               children: [
-                Text(
-                  'Email: ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                Text('Email: ', style: TextStyle(fontWeight: FontWeight.bold)),
                 Expanded(
                   child: Text(
                     _userEmail ?? 'Unknown',
@@ -236,15 +221,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            
+
             SizedBox(height: 16),
-            
+
             Row(
               children: [
-                Text(
-                  'Status: ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                Text('Status: ', style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(
                   _userId != null ? 'Active' : 'Error',
                   style: TextStyle(
