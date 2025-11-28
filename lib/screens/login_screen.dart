@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/validators.dart';
-import '../services/api_service.dart';
+import '../services/auth_service.dart';
 import 'code_input_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       isLoading = true;
     });
 
-    bool success = await ApiService.sendCodeToEmail(_emailController.text);
+    bool success = await AuthService.sendCodeToEmail(_emailController.text);
 
     setState(() {
       isLoading = false;
